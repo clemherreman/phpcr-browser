@@ -2,6 +2,8 @@
   "name": "marmelab/phpcr-browser",
   "version": "1.0.0",
   "dependencies": {
+    "requirejs": "~2.1.14",
+    "requirejs-text": "~2.0.12",
     "angular": "1.2.14",
     "angular-route": "1.2.6",
     "angular-ui-router": "0.2.10",
