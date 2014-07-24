@@ -1,7 +1,7 @@
 /* global define */
 
 define([
-  'jsonpatch'
+    'jsonpatch'
 ], function(JSONPatch) {
     'use strict';
 

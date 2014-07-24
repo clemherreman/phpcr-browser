@@ -71,7 +71,7 @@ define(['angular'], function(angular) {
             if (path.slice(0,1) === '/') {
                 path = path.slice(1);
             }
-            this.nodeCache[repositoryName+'/'+workspaceName+path] = this.workspace(repositoryName, workspaceName).one(this.nodesPrefix, path);
+            this.nodeCache[repositoryName+'/'+workspaceName+path] = this.workspace(repositoryName, workspaceName).one(this.provider.nodesPrefix, path);
         }
         return this.nodeCache[repositoryName+'/'+workspaceName+path];
     };
@@ -87,7 +87,7 @@ define(['angular'], function(angular) {
         if (path.slice(0,1) === '/') {
             path = path.slice(1);
         }
-        return this.workspace(repositoryName, workspaceName).all(this.nodesPrefix).all(path);
+        return this.workspace(repositoryName, workspaceName).all(this.provider.nodesPrefix).all(path);
     };
 
     /**
@@ -101,7 +101,7 @@ define(['angular'], function(angular) {
         if (path.slice(0,1) === '/') {
             path = path.slice(1);
         }
-        return this.workspace(repositoryName, workspaceName).all(this.nodesPrefix).all(path + '@properties');
+        return this.workspace(repositoryName, workspaceName).all(this.provider.nodesPrefix).all(path + '@properties');
     };
 
     /**
@@ -116,7 +116,7 @@ define(['angular'], function(angular) {
         if (path.slice(0,1) === '/') {
             path = path.slice(1);
         }
-        return this.workspace(repositoryName, workspaceName).all(this.nodesPrefix).one(path + '@properties', propertyName);
+        return this.workspace(repositoryName, workspaceName).all(this.provider.nodesPrefix).one(path + '@properties', propertyName);
     };
 
     /**

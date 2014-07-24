@@ -74,9 +74,8 @@ define([], function () {
     RepositoryController.prototype.openWorkspace = function(workspace) {
         this.$state.go('node', {
             repository: workspace.getRepository().getName(),
-            workspace: workspace
+            workspace: workspace.getName()
         });
-        // .then(function(e) { console.log(e); }, function(e) { console.log(e); });
     };
 
     RepositoryController.prototype.deleteWorkspace = function(element) {

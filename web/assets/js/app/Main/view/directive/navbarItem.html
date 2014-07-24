@@ -1,0 +1,11 @@
+<li ng-class="navbarController.menu.repositories.class" ng-attr-dropdown="link.sublinks !== undefined">
+    <a ng-show="link.sublinks !== undefined" class="dropdown-toggle">
+        {{ link.label }}
+    </a>
+    <ul ng-show="link.sublinks !== undefined" class="dropdown-menu large">
+      <li ng-repeat="sublink in link.sublinks" ng-class="sublink.class">
+        <a ng-click="navbarItemController.openLink(sublink)">{{ sublink.label }}</a>
+      </li>
+    </ul>
+    <a ng-click="navbarItemController.openLink(sublink)" ng-hide="link.sublinks !== undefined">{{ link.label }}</a>
+</li>

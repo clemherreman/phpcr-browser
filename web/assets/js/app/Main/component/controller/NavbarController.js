@@ -12,8 +12,10 @@ define([], function () {
         this.$state = $state;
         this.MenuContainer = MenuContainer;
 
-        $scope.treeIsDisplayed = false;
-        $scope.isWorkspaceState = false;
+        this.navbarCollapsed = true;
+
+        this.treeIsDisplayed = false;
+        this.isWorkspaceState = false;
 
         $scope.broadcast = function(event, data) {
             $scope.$emit(event, data);
@@ -38,6 +40,10 @@ define([], function () {
 
         $scope.$on('$destroy', this.destroy.bind(this));
     }
+
+    NavbarController.prototype.toggleNavbar = function() {
+        this.navbarCollapsed = !this.navbarCollapsed;
+    };
 
     NavbarController.prototype.isPreferredLanguage = function(key) {
         return this.$translate.use() === key;

@@ -10,7 +10,7 @@ define([
         var firstLoad = true;
 
         $stateProvider
-            .state('repositores', {
+            .state('repositories', {
                 'parent': 'main',
                 'url': '/',
                 'controller': 'RepositoriesController',
@@ -25,6 +25,7 @@ define([
                         $rootScope.$emit('browser.load');
                         return ObjectMapper.find('/' + $stateParams.repository).then(function(repository) {
                             $rootScope.$emit('browser.loaded');
+                            $rootScope.currentRepository = repository;
                             return repository;
                         });
                     }]
@@ -56,7 +57,6 @@ define([
                             };
                         }
 
-
                         return ObjectMapper.find('/' + $stateParams.repository + '/' + $stateParams.workspace + path, params).then(function(node) {
                             if (firstLoad) {
                                 firstLoad = false;
@@ -65,6 +65,7 @@ define([
                                 });
                             }
 
+                            $rootScope.currentNode = node;
                             return node;
                         });
                     }]

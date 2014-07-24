@@ -37,14 +37,16 @@ define(['angular'], function(angular) {
             'repositories': function(callback) {
                 self.ObjectMapper.find().then(function(repositories) {
                     var link = {
-                        label: this.repositoriesLabel,
-                        class: 'dropdown',
+                        label: self.repositoriesLabel,
                         sublinks: []
                     };
                     angular.forEach(repositories, function(repository) {
                         link.sublinks.push({
                             label: repository.getName(),
-                            href: '/' + repository.getName()
+                            state: 'repository',
+                            params: {
+                                repository: repository.getName()
+                            }
                         });
                     });
                     callback(link);
@@ -56,7 +58,7 @@ define(['angular'], function(angular) {
             * @param  {Function} callback
             */
             'repository': ['repositories', function(callback) {
-                var repository = this.$rootScope.repository ? this.$rootScope.repository : this.$rootScope.currentNode.getWorkspace().getRepository();
+                var repository = self.$rootScope.currentRepository ? self.$rootScope.currentRepository : self.$rootScope.currentNode.getWorkspace().getRepository();
                 repository.getWorkspaces().then(function(workspaces) {
                     var link = {
                         label: repository.getName(),
@@ -66,7 +68,11 @@ define(['angular'], function(angular) {
                     angular.forEach(workspaces, function(workspace) {
                         link.sublinks.push({
                             label: workspace.getName(),
-                            href: '/' + repository.getName() + '/' + workspace.getName()
+                            state: 'node',
+                            params: {
+                                repository: repository.getName(),
+                                workspace: workspace.getName()
+                            }
                         });
                     });
 
@@ -79,10 +85,14 @@ define(['angular'], function(angular) {
             * @param  {Function} callback
             */
             'node': ['repository', function(callback) {
-                var workspace = this.$rootScope.currentNode.getWorkspace();
+                var workspace = self.$rootScope.currentNode.getWorkspace();
                 var link = {
                     label: workspace.getName(),
-                    href: '/' + workspace.getRepository().getName() + '/' + workspace.getName()
+                    state: 'node',
+                    params: {
+                        repository: workspace.getRepository().getName(),
+                        workspace: workspace.getName()
+                    }
                 };
 
                 callback(link);
@@ -97,11 +107,9 @@ define(['angular'], function(angular) {
      */
     MenuBuilderFactory.prototype.callbackFactory = function(name) {
         var self = this;
-        return function() {
-            return {
-                name: name,
-                builder: self.builders[name]
-            };
+        return {
+            name: name,
+            builder: self.builders[name]
         };
     };
 

@@ -11,7 +11,7 @@ define([], function() {
         this.$rootScope.$on('$stateChangeSuccess', this.onStateChangeSuccess.bind(this));
         this.$rootScope.$on('$stateChangeStart', this.onStateChangeStart.bind(this));
         this.$rootScope.$on('browser.load', this.onBrowserLoad.bind(this));
-        this.$rootScope.$on('browser.loaded', this.onBrowserLoad.bind(this));
+        this.$rootScope.$on('browser.loaded', this.onBrowserLoaded.bind(this));
         this.$rootScope.$on('_search.change', this.onSearchChange.bind(this));
         this.$rootScope.$on('_tree.toggle', this.onTreeToggle.bind(this));
     }
@@ -81,4 +81,6 @@ define([], function() {
     };
 
     EventBridge.$inject = ['$rootScope'];
+
+    return EventBridge;
 });
